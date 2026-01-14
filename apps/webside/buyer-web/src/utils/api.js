@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// const API_URL = 'http://localhost:5500/api'; 
-// Use IP if testing from other devices, but localhost is fine for web on same machine.
-// Ideally usage env variable.
-const API_URL = 'https://demo.ranx24.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5500/api';
+
 
 const api = axios.create({
     baseURL: API_URL,
@@ -42,7 +40,7 @@ export const getImageUrl = (imagePath) => {
 
     if (imagePath.startsWith('http')) return imagePath;
 
-    const host = 'https://demo.ranx24.com';
+    const host = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5500';
     // Ensure path starts with /
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
     return `${host}${cleanPath}`;
