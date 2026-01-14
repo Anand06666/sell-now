@@ -32,6 +32,8 @@ app.use(compression());
 const allowedOrigins = [
     'https://demo.ranx24.com',
     'https://www.demo.ranx24.com',
+    'https://frontenddemo.ranx24.com',
+    'https://www.frontenddemo.ranx24.com',
     'http://localhost:3000',  // For local development
     'http://localhost:5173',  // Vite dev server
     'http://localhost:5174',  // Vite dev server (alternate port)
