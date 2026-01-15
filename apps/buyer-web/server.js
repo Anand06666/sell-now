@@ -7,7 +7,12 @@ const PORT = process.env.PORT || 3001;
 // Serve static files from dist directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Handle SPA routing - send all requests to index.html
+// Handle Admin App routing
+app.get('/admin/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'admin', 'index.html'));
+});
+
+// Handle Main App routing - send all requests to index.html
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
