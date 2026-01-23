@@ -4,9 +4,6 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5500/api';
 
 const api = axios.create({
     baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
 });
 
 api.interceptors.request.use((config) => {
@@ -16,5 +13,33 @@ api.interceptors.request.use((config) => {
     }
     return config;
 });
+
+export const getImageUrl = (imagePath: string | undefined | null) => {
+    if (!imagePath) return '';
+
+    // Fix for legacy data with localhost
+    if (imagePath.includes('localhost')) {
+        // This might need adjustment if users still have localhost links in DB
+        // Ideally replace origin with current API origin
+    }
+
+    if (imagePath.startsWith('http')) return imagePath;
+
+    // Use current API Host for relative paths
+    let host = API_URL;
+    if (host.endsWith('/api')) {
+        host = host.slice(0, -4);
+    }
+
+    // Ensure path starts with /
+    const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+
+    // If it's already an uploads path, just append to host
+    if (cleanPath.startsWith('/uploads/')) {
+        return `${host}${cleanPath}`;
+    }
+
+    return `${host}/uploads${cleanPath}`;
+};
 
 export default api;

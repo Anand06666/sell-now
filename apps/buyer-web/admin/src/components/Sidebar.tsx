@@ -1,5 +1,7 @@
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, ShoppingBag, Users as UsersIcon, LogOut, ChevronRight, FolderTree, Store, ShoppingCart, CheckCircle } from 'lucide-react';
+import logo from '../assets/logo.jpg';
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -24,7 +26,7 @@ export default function Sidebar() {
     return (
         <div className="w-72 bg-white border-r border-gray-200 h-screen flex flex-col fixed left-0 top-0 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-50">
             <div className="p-8 pb-6 border-b border-gray-100/50 flex items-center gap-3.5">
-                <img src="/logo.jpg" alt="SellNow Logo" className="w-10 h-10 object-contain" />
+                <img src={logo} alt="SellNow Logo" className="w-10 h-10 object-contain" />
                 <div>
                     <h1 className="text-xl font-bold text-gray-900 tracking-tight leading-none">SellNow</h1>
                     <span className="text-[10px] uppercase font-bold text-primary tracking-widest mt-0.5 block opacity-90">Workspace</span>

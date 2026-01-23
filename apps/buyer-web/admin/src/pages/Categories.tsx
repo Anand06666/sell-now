@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, FolderTree, FolderPlus } from 'lucide-react';
-import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5500/api';
+import api from '../utils/api';
 
 interface Subcategory {
     _id: string;
     name: string;
+    image?: string;
 }
 
 interface Category {
     _id: string;
     name: string;
+    image?: string;
     subcategories: Subcategory[];
 }
 
@@ -35,7 +35,7 @@ export default function Categories() {
 
     const fetchCategories = async () => {
         try {
-            const { data } = await axios.get(`${API_URL}/categories`);
+            const { data } = await api.get('/categories');
             setCategories(data);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -53,7 +53,8 @@ export default function Categories() {
         formData.append('images', file);
 
         try {
-            const { data } = await axios.post(`${API_URL}/upload/multiple`, formData, {
+            // Note: Endpoint expects 'images' key and returns array of URLs
+            const { data } = await api.post('/upload/multiple', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             // data is array of urls
@@ -69,12 +70,7 @@ export default function Categories() {
 
     const handleCreateCategory = async () => {
         try {
-            const token = localStorage.getItem('token');
-            await axios.post(
-                `${API_URL}/categories`,
-                { name: categoryName, image: categoryImage },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await api.post('/categories', { name: categoryName, image: categoryImage });
             setCategoryName('');
             setCategoryImage('');
             setShowCategoryModal(false);
@@ -87,12 +83,7 @@ export default function Categories() {
     const handleUpdateCategory = async () => {
         if (!editingCategory) return;
         try {
-            const token = localStorage.getItem('token');
-            await axios.put(
-                `${API_URL}/categories/${editingCategory._id}`,
-                { name: categoryName, image: categoryImage },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await api.put(`/categories/${editingCategory._id}`, { name: categoryName, image: categoryImage });
             setCategoryName('');
             setCategoryImage('');
             setEditingCategory(null);
@@ -106,10 +97,7 @@ export default function Categories() {
     const handleDeleteCategory = async (id: string) => {
         if (!confirm('Are you sure you want to delete this category?')) return;
         try {
-            const token = localStorage.getItem('token');
-            await axios.delete(`${API_URL}/categories/${id}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            await api.delete(`/categories/${id}`);
             fetchCategories();
         } catch (error: any) {
             alert(error.response?.data?.message || 'Error deleting category');
@@ -119,12 +107,7 @@ export default function Categories() {
     const handleAddSubcategory = async () => {
         if (!selectedCategory) return;
         try {
-            const token = localStorage.getItem('token');
-            await axios.post(
-                `${API_URL}/categories/${selectedCategory._id}/subcategories`,
-                { name: subcategoryName, image: subcategoryImage },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await api.post(`/categories/${selectedCategory._id}/subcategories`, { name: subcategoryName, image: subcategoryImage });
             setSubcategoryName('');
             setSubCategoryImage('');
             setShowSubcategoryModal(false);
@@ -138,12 +121,7 @@ export default function Categories() {
     const handleUpdateSubcategory = async () => {
         if (!selectedCategory || !editingSubcategory) return;
         try {
-            const token = localStorage.getItem('token');
-            await axios.put(
-                `${API_URL}/categories/${selectedCategory._id}/subcategories/${editingSubcategory._id}`,
-                { name: subcategoryName, image: subcategoryImage },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await api.put(`/categories/${selectedCategory._id}/subcategories/${editingSubcategory._id}`, { name: subcategoryName, image: subcategoryImage });
             setSubcategoryName('');
             setSubCategoryImage('');
             setEditingSubcategory(null);
@@ -158,10 +136,7 @@ export default function Categories() {
     const handleDeleteSubcategory = async (categoryId: string, subId: string) => {
         if (!confirm('Are you sure you want to delete this subcategory?')) return;
         try {
-            const token = localStorage.getItem('token');
-            await axios.delete(`${API_URL}/categories/${categoryId}/subcategories/${subId}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            await api.delete(`/categories/${categoryId}/subcategories/${subId}`);
             fetchCategories();
         } catch (error: any) {
             alert(error.response?.data?.message || 'Error deleting subcategory');
