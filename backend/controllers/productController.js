@@ -106,7 +106,7 @@ const getProducts = async (req, res) => {
         console.error('getProducts Error:', error);
 
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_products.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_products.txt');
         fs.appendFileSync(debugPath, `\n[${new Date().toISOString()}] GET PRODUCTS ERROR: ${error.message}\nSTACK: ${error.stack}\n`);
 
         res.status(500).json({ message: 'Failed to fetch products', error: error.message });

@@ -88,7 +88,7 @@ app.use((err, req, res, next) => {
 
     const fs = require('fs');
     const path = require('path');
-    const debugPath = path.join(__dirname, 'debug_server.txt');
+    const debugPath = path.join(__dirname, 'logs', 'debug_server.txt');
     fs.appendFileSync(debugPath, `[FATAL] ${err.message}\nSTACK: ${err.stack}\n`);
 
     res.status(500).json({
@@ -98,6 +98,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (req, res) => {
+    // Health check
     res.send('SellNow API is running...');
 });
 

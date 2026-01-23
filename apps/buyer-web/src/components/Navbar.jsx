@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ShoppingCart, User, Menu, X, LogOut } from 'lucide-react';
+import logo from '../assets/logo.jpg';
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function Navbar() {
 
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
-                        <img src="/logo.jpg" alt="Sell Now" className="h-10 w-auto rounded" />
+                        <img src={logo} alt="Sell Now" className="h-10 w-auto rounded" />
                         <span className="text-2xl font-bold text-primary">Sell Now</span>
                     </Link>
 

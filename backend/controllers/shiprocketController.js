@@ -238,7 +238,7 @@ const createShiprocketOrder = async (req, res) => {
             return createShiprocketOrder(req, res);
         }
 
-        const debugPath = path.join(__dirname, '..', 'debug_shiprocket.txt');
+        const debugPath = path.join(__dirname, '..', 'logs', 'debug_shiprocket.txt');
         const errorLog = `\n[${new Date().toISOString()}] CREATE ORDER ERROR:\nMessage: ${error.message}\nResponse: ${JSON.stringify(error.response?.data)}\nPayload: ${JSON.stringify(payload)}\n`;
         fs.appendFileSync(debugPath, errorLog);
 

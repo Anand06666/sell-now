@@ -61,7 +61,7 @@ const createPaymentOrder = async (req, res) => {
         console.error('Create Payment Order Error:', error);
 
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_payment_online.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_payment_online.txt');
         const errorContent = JSON.stringify(error, Object.getOwnPropertyNames(error), 2);
         fs.appendFileSync(debugPath, `\n[${new Date().toISOString()}] ONLINE PAYMENT ERROR:\n${errorContent}\n`);
 
@@ -181,7 +181,7 @@ const handleCOD = async (req, res) => {
         console.error('COD Error:', error);
 
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_cod.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_cod.txt');
         fs.appendFileSync(debugPath, `\n[${new Date().toISOString()}] COD ERROR: ${error.message}\nSTACK: ${error.stack}\n`);
 
         res.status(500).json({ message: 'Failed to create COD order', error: error.message });

@@ -47,7 +47,7 @@ const createOrder = async (req, res) => {
 
                 // Find the variant - Robust Check with Logging
                 const fs = require('fs');
-                const debugPath = require('path').join(__dirname, '..', 'debug_variant.txt');
+                const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_variant.txt');
 
                 const variantIndex = product.variants.findIndex(v => {
                     let sizeAttr = undefined;
@@ -191,7 +191,7 @@ const createOrder = async (req, res) => {
 
         // Log to file to see it
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_variant.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_variant.txt');
         fs.appendFileSync(debugPath, `\n[FATAL ERROR]: ${error.message}\nSTACK: ${error.stack}\n`);
 
         res.status(500).json({ message: error.message, stack: error.stack, fullError: JSON.stringify(error) });
@@ -220,7 +220,7 @@ const getBuyerOrders = async (req, res) => {
         console.error('Get Buyer Orders Error:', error);
 
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_orders.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_orders.txt');
         fs.appendFileSync(debugPath, `\n[${new Date().toISOString()}] GET ORDERS ERROR: ${error.message}\nSTACK: ${error.stack}\n`);
 
         res.status(500).json({ message: error.message });
@@ -266,7 +266,7 @@ const getOrderById = async (req, res) => {
 
         // Debug Auth
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_order_auth.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_order_auth.txt');
         const debugInfo = `\n[${new Date().toISOString()}] AUTH CHECK:\nOrder ID: ${order._id}\nUser ID: ${req.user._id}\nUser Role: ${req.user.role}\nBuyer ID: ${order.buyer._id}\nSeller ID: ${order.seller._id}\n`;
         fs.appendFileSync(debugPath, debugInfo);
 

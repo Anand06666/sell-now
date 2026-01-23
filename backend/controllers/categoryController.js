@@ -11,7 +11,7 @@ const getCategories = async (req, res) => {
         console.error('getCategories Error:', error);
 
         const fs = require('fs');
-        const debugPath = require('path').join(__dirname, '..', 'debug_categories.txt');
+        const debugPath = require('path').join(__dirname, '..', 'logs', 'debug_categories.txt');
         fs.appendFileSync(debugPath, `\n[${new Date().toISOString()}] GET CATEGORIES ERROR: ${error.message}\nSTACK: ${error.stack}\n`);
 
         res.status(500).json({ message: error.message });
