@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, ShoppingBag, Users as UsersIcon, LogOut, ChevronRight, FolderTree, Store, ShoppingCart, CheckCircle } from 'lucide-react';
 import logo from '../assets/logo.jpg';
