@@ -33,8 +33,13 @@ export const getImageUrl = (imagePath) => {
         // Extract relative path after /uploads/
         const relativePath = imagePath.split('/uploads/')[1];
         if (relativePath) {
-            const host = 'https://demo.ranx24.com';
-            return `${host}/uploads/${relativePath}`;
+            if (relativePath) {
+                // Use the configured API URL origin or fallback
+                let host = import.meta.env.VITE_API_URL || 'http://localhost:5500';
+                // Remove /api if present to get base URL
+                host = host.replace(/\/api$/, '');
+                return `${host}/uploads/${relativePath}`;
+            }
         }
     }
 
