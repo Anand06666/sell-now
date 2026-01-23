@@ -1,5 +1,21 @@
 require('dotenv').config();
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
+
+// Ensure necessary directories exist
+const uploadsDir = path.join(__dirname, 'uploads');
+const logsDir = path.join(__dirname, 'logs');
+
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+    console.log('Created uploads directory');
+}
+
+if (!fs.existsSync(logsDir)) {
+    fs.mkdirSync(logsDir);
+    console.log('Created logs directory');
+}
 
 const cors = require('cors');
 const connectDB = require('./config/db');
