@@ -429,7 +429,7 @@ export default function ProductDetails() {
                             </div>
 
                             {/* Actions */}
-                            <div className="flex gap-4">
+                            <div className="flex flex-col sm:flex-row gap-4">
                                 <button
                                     onClick={() => handleAddToCart()}
                                     className="flex-1 bg-white text-primary border-2 border-primary py-4 rounded-xl font-bold text-lg hover:bg-orange-50 transition-all flex items-center justify-center space-x-2 cursor-pointer"

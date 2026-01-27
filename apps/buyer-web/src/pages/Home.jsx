@@ -76,7 +76,7 @@ export default function Home() {
                 </div>
 
                 {/* Hero Image / Carousel */}
-                <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-100 relative">
+                <div className="h-56 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full bg-gray-100 relative">
                     {heroImages.map((img, index) => (
                         <div
                             key={index}
