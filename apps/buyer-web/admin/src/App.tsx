@@ -10,6 +10,7 @@ import SellerDetail from './pages/SellerDetail';
 import Orders from './pages/Orders';
 import SellerApproval from './pages/SellerApproval';
 import Login from './pages/Login';
+import Settings from './pages/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -45,6 +46,7 @@ function App() {
                                     <Route path="/sellers/:id" element={<SellerDetail />} />
                                     <Route path="/orders" element={<Orders />} />
                                     <Route path="/seller-approvals" element={<SellerApproval />} />
+                                    <Route path="/settings" element={<Settings />} />
                                 </Routes>
                             </Layout>
                         </ProtectedRoute>

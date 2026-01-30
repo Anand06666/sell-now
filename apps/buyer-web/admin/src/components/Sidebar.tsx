@@ -22,6 +22,7 @@ export default function Sidebar() {
         { label: 'Sellers', icon: Store, to: '/sellers' },
         { label: 'Seller Approvals', icon: CheckCircle, to: '/seller-approvals' },
         { label: 'Users', icon: UsersIcon, to: '/users' },
+        { label: 'Settings', icon: Store, to: '/settings' },
     ];
 
     const toggleSidebar = () => setIsOpen(!isOpen);

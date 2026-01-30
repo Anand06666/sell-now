@@ -35,6 +35,7 @@ const sellerRoutes = require('./routes/sellerRoutes');
 const adminOrderRoutes = require('./routes/adminOrderRoutes');
 const adminSellerRoutes = require('./routes/adminSellerRoutes');
 const shiprocketRoutes = require('./routes/shiprocketRoutes');
+const settingsRoutes = require('./routes/settingsRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -97,6 +98,7 @@ app.use('/api/sellers', sellerRoutes);
 app.use('/api/admin/orders', adminOrderRoutes);
 app.use('/api/admin/sellers', adminSellerRoutes);
 app.use('/api/shiprocket', shiprocketRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
